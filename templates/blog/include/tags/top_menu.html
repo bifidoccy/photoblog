@@ -1,0 +1,32 @@
+{% load mptt_tags %}
+
+<ul>
+    {% recursetree list_of_cats %}
+        <li class="has-sub">
+            {% if node.is_leaf_node %}
+                <a href="{% url 'article_list' slug=node.name|lower %}" class="anode"><span>{{ node.name }}</span></a>
+            {% else %}
+                <a href="{% url 'article_list' node.name|lower %}" class="anode"><span>{{ node.name }}</span></a>
+                <ul class="children">
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>
+
+
+                        <!-- <ul>
+                            <li class="has-sub"><a href="#"><span>Item 1</span></a>
+                                <ul>
+                                    <li><a href="#"><span>Sub Item</span></a></li>
+                                    <li class="last"><a href="#"><span>Sub Item</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub"><a href="#"><span>Item 2</span></a>
+                                <ul>
+                                    <li><a href="#"><span>Sub Item</span></a></li>
+                                    <li class="last"><a href="#"><span>Sub Item</span></a></li>
+                                </ul>
+                            </li>
+                        </ul> -->

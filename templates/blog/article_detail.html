@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load cache %}
+
+{% block content %}
+{% cache 5000 detail %}
+<section id="container">
+	<div class="wrap-container">
+		<!-----------------Content-Box-------------------->
+		<div id="main-content">
+			<div class="wrap-content">
+				<div class="row">
+					<article class="single-post zerogrid">
+						<div class="row wrap-post"><!--Start Box-->
+							<div class="entry-header">
+								<span class="time">{{ article.create_at|date:"F d, Y" }}  by {{ article.author }}</span>
+								<h2 class="entry-title"><a href="#">{{ article.title }}</a></h2>
+								<span class="cat-links">
+									{% for cat in article.category.all %}
+										<a href="{% url 'article_list' cat.slug|lower %}">{{ cat }}</a>
+									{% endfor %}
+								</span>
+							</div>
+							<div class="post-thumbnail-wrap">
+								<img src="{{ article.image.url }}">
+							</div>
+							<div class="entry-content">
+								<div class="excerpt"><p>{{ article.text }}</p>
+							</div>
+						</div>
+					</article>
+					<div class="zerogrid">
+						<div class="comments-are">
+							<div id="comment">
+								<h3>Leave a Reply</h3>
+								<span>Your email address will not be published. Required fields are marked </span>
+								<form name="comment_form" id="comment_form" method="post" action="{% url 'create_reply' pk=article.id %}">
+									{% csrf_token %}
+									{{ form }}
+<!-- 									<label>
+									<span>Comment:</span>
+									<textarea name="message" id="message"></textarea>
+									</label>
+									<label>
+									<span>Name:</span>
+									<input type="text"  name="name" id="name" required>
+									</label>
+									<label>
+									<span>Email:</span>
+									<input type="email"  name="email" id="email" required>
+									</label> -->
+									<center><input class="sendButton" type="submit" name="submitcomment" value="Submit"></center>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endcache %}
+{% endblock content %}

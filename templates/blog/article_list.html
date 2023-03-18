@@ -1,0 +1,37 @@
+{% extends 'base.html '%}
+
+{% block content %}
+<section id="container">
+	<div class="wrap-container">
+		<!-----------------Content-Box-------------------->
+		<div id="main-content">
+			<div class="wrap-content">
+				<div class="row">
+					{% for article in article_list %}
+						<article class="single-post zerogrid">
+							<div class="row wrap-post"><!--Start Box-->
+								<div class="entry-header">
+									<span class="time">{{ article.create_at|date:"F d, Y" }} by {{ article.author }}</span>
+									<h2 class="entry-title"><a href="#">{{ article.title }}</a></h2>
+									<span class="cat-links">
+										{% for cat in article.category.all %}
+											<a href="{% url 'article_list' cat.slug|lower %}">{{ cat }}</a>
+										{% endfor %}
+									</span>
+								</div>
+								<div class="post-thumbnail-wrap">
+									<img src="{{ article.image.url }}">
+								</div>
+								<div class="entry-content">
+									<p>{{ article.text }}</p>
+									<center><a class="button " href="{{ article.get_absolute_url }}">Read More</a></center>
+								</div>
+							</div>
+						</article>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock content %}

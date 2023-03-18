@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load menu_tags social_tags gallery_tags static cache %}
+
+
+{% block content %}
+{% cache 60 home %}
+{% get_slider %}
+
+<!--////////////////////////////////////Container-->
+<section id="container">
+	<div class="wrap-container">
+		<!-----------------content-box-1-------------------->
+		<section class="content-box box-1">
+			<div class="zerogrid">
+				<div class="wrap-box"><!--Start Box-->
+					<div class="box-header">
+						<h2>{{ get_about.name|upper }}</h2>
+					</div>
+					<div class="box-content">
+						<p>{{ get_about.main_about|safe }}</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-----------------content-box-2-------------------->
+
+		{% get_gallery %}
+
+		<!-----------------content-box-3-------------------->
+		<section class="content-box box-3">
+			<div class="zerogrid">
+				{% get_philosophy as philo %}
+				<div class="wrap-box"><!--Start Box-->
+					<div class="box-header">
+						<h2>{{ philo.name|upper }}</h2>
+					</div>
+					<div class="box-content">
+						<div class="row">
+							<div class="col-1-2">
+								<div class="wrap-col">
+									<p>{{ philo.par1 }}</p>
+								</div>
+							</div>
+							<div class="col-1-2">
+								<div class="wrap-col">
+									<p>{{ philo.par2 }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-----------------content-box-4-------------------->
+		<section class="content-box box-style-1 box-4">
+			<div class="zerogrid" style="width: 100%">
+				<div class="wrap-box"><!--Start Box-->
+					{% get_last_three_articles as article_list %}
+					{% for article in article_list %}
+						{% if forloop.counter == 2 %}
+							<div class="row">
+								<article>
+									<div class="col-1-2 f-right">
+										<img src="{{ article.image.url }}" alt="">
+									</div>
+									<div class="col-1-2">
+										<div class="entry-content t-center">
+											<h3>{{ article.title }}</h3>
+											<p>{{ article.text|slice:"250" }}</p>
+											<a class="button" href="{{ article.get_absolute_url }}">Read More</a>
+										</div>
+									</div>
+								</article>
+							</div>
+						{% else %}
+							<div class="row">
+								<article>
+									<div class="col-1-2">
+										<img src="{{ article.image.url }}" alt="ta1">
+									</div>
+									<div class="col-1-2">
+										<div class="entry-content t-center">
+											<h3>{{ article.title }}</h3>
+											<p>{{ article.text|slice:"250" }}...</p>
+											<a class="button" href="{{ article.get_absolute_url }}">Read More</a>
+										</div>
+									</div>
+								</article>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	</div>
+</section>
+<script>
+$(document).ready(function() {
+  $("#owl-slide").owlCarousel({
+	autoPlay: 3000,
+	items : 1,
+	itemsDesktop : [1199,1],
+	itemsDesktopSmall : [979,1],
+	itemsTablet : [768, 1],
+	itemsMobile : [479, 1],
+	navigation: true,
+	navigationText: ['<i class="fa fa-chevron-left fa-5x"></i>', '<i class="fa fa-chevron-right fa-5x"></i>'],
+	pagination: false
+  });
+});
+</script>
+<script src="{% static 'owl-carousel/owl.carousel.js' %}"></script>
+{% endcache %}
+{% endblock content %}
