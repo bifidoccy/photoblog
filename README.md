@@ -39,9 +39,3 @@ Django based simple photoblog (pet-project)
 ##### 8) Links
 - Site: http://127.0.0.1:8000/
 - Admin-panel: http://127.0.0.1:8000/admin
-
-## License
-
-[The MIT License](https://opensource.org/license/mit/)
-
-Copyright (c) 2023 mymotherati - Maslov Roman
