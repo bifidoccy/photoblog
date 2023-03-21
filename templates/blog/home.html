@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
-{% load menu_tags social_tags gallery_tags static cache %}
+{% load menu_tags social_tags gallery_tags static %}
 
 
 {% block content %}
-{% cache 60 home %}
 {% get_slider %}
 
 <!--////////////////////////////////////Container-->
@@ -110,5 +109,4 @@ $(document).ready(function() {
 });
 </script>
 <script src="{% static 'owl-carousel/owl.carousel.js' %}"></script>
-{% endcache %}
 {% endblock content %}

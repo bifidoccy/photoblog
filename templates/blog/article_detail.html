@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
-{% load cache %}
 
 {% block content %}
-{% cache 5000 detail %}
 <section id="container">
 	<div class="wrap-container">
 		<!-----------------Content-Box-------------------->
@@ -58,5 +56,4 @@
 		</div>
 	</div>
 </section>
-{% endcache %}
 {% endblock content %}

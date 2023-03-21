@@ -1,6 +1,5 @@
-{% load menu_tags social_tags cache %}
+{% load menu_tags social_tags %}
 
-{% cache 5000 footer %}
 <footer>
 	<div class="zerogrid wrap-footer">
 		{% get_about as about %}
@@ -86,4 +85,3 @@
 		</div>
 	</div>
 </footer>
-{% endcache %}
