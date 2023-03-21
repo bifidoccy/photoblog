@@ -9,6 +9,8 @@ idea
 dist
 db.sqlite3
 
+cache
+
 prod_settings.py
 local_settings.py
 
