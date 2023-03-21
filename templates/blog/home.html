@@ -9,14 +9,15 @@
 <section id="container">
 	<div class="wrap-container">
 		<!-----------------content-box-1-------------------->
+		{% get_about as about %}
 		<section class="content-box box-1">
 			<div class="zerogrid">
 				<div class="wrap-box"><!--Start Box-->
 					<div class="box-header">
-						<h2>{{ get_about.name|upper }}</h2>
+						<h2>{{ about.name|upper }}</h2>
 					</div>
 					<div class="box-content">
-						<p>{{ get_about.main_about|safe }}</p>
+						<p>{{ about.main_about|safe }}</p>
 					</div>
 				</div>
 			</div>
