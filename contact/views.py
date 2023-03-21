@@ -9,8 +9,10 @@ from .forms import ContactForm
 class ContactView(View):
 	def get(self, request):
 		embed_map = EmbedMap.objects.last()
-		form = ContactForm()
-		return render(request, 'contact/contact.html', context={'map': embed_map.source, 'form': form})
+		context = {'form': ContactForm()}
+		if embed_map is not None:
+			context['map'] = embed_map.source 
+		return render(request, 'contact/contact.html', context=context)
 
 class CreateComment(CreateView):
 	model = ContactModel
